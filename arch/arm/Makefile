@@ -25,7 +25,7 @@ $(odir)/%.op: $(sdir)/%.S
 	$(QUIET_ASM)$(CC) $(LIB_CFLAGS) -c -o $@ $<
 
 $(odir)/%.op: $(sdir)/%.c
-	$(QUIET_CC_FPIC)$(CC) $(LIB_CFLAGS) -c -o $@ $<
+	$(QUIET_CC_FPIC)$(CC) $(LIB_CFLAGS) -c -o $@ $< -DEF_ARM_ABI_FLOAT_HARD=0x400
 
 $(odir)/%.o: $(sdir)/%.c
 	$(QUIET_CC)$(CC) $(UFTRACE_CFLAGS) -c -o $@ $<

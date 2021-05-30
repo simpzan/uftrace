@@ -338,7 +338,8 @@ __visible_default void __cxa_rethrow(void)
 	real_cxa_rethrow();
 }
 
-__visible_default void _Unwind_Resume(void *exception)
+void __real__Unwind_Resume(void *exception);
+__visible_default void __wrap__Unwind_Resume(void *exception)
 {
 	struct mcount_thread_data *mtdp;
 
@@ -360,7 +361,7 @@ __visible_default void _Unwind_Resume(void *exception)
 		mcount_rstack_restore(mtdp);
 	}
 
-	real_unwind_resume(exception);
+	__real__Unwind_Resume(exception);
 }
 
 __visible_default void * __cxa_begin_catch(void *exception)
