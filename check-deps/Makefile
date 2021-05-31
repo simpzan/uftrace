@@ -46,7 +46,13 @@ CFLAGS_cc_has_minline_all_stringops = -minline-all-stringops
 check-build: check-tstamp $(CHECK_LIST)
 
 $(CHECK_LIST): %: __%.c
-	@$(CC) $(CHECK_CFLAGS) -o $@ $< $(CHECK_LDFLAGS) > /dev/null 2>&1
+	$(CC) $(CHECK_CFLAGS) -o $@ $< $(CHECK_LDFLAGS) \
+	-L $(CROOT)/out/target/product/generic_arm64/obj/STATIC_LIBRARIES/libelf_intermediates/ \
+	-L $(CROOT)/out/target/product/generic_arm64/obj/STATIC_LIBRARIES/libdw_intermediates/ \
+	-lz \
+	-I $(CROOT)/external/elfutils/libelf \
+	-I $(CROOT)/external/elfutils/include \
+	  > /dev/null 2>&1
 
 check-tstamp: PHONY
 	@touch $@

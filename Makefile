@@ -65,6 +65,15 @@ ifneq ($(elfdir),)
   COMMON_LDFLAGS += -L$(elfdir)/lib
 endif
 
+COMMON_LDFLAGS += \
+	-L $(CROOT)/out/target/product/generic_arm64/obj/STATIC_LIBRARIES/libelf_intermediates/ \
+	-L $(CROOT)/out/target/product/generic_arm64/obj/STATIC_LIBRARIES/libdw_intermediates/ \
+	-lz
+COMMON_CFLAGS += \
+	-I $(CROOT)/external/elfutils/libelf \
+	-I $(CROOT)/external/elfutils/libdw \
+	-I $(CROOT)/external/elfutils/include
+
 COMMON_CFLAGS += -W -Wall -Wno-unused-parameter -Wno-missing-field-initializers
 
 #
